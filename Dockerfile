@@ -33,6 +33,9 @@ RUN apt-get install -y \
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-urdf \
     ros-${ROS_DISTRO}-rviz \
+    ros-${ROS_DISTRO}-gazebo-msgs \
+    ros-${ROS_DISTRO}-gazebo-plugins \
+    ros-${ROS_DISTRO}-gazebo-ros-control \
     python3-catkin-tools \
     python3-rosdep && \
     apt-get autoremove -y && \
@@ -69,4 +72,5 @@ RUN rosdep fix-permissions && rosdep update
 RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
     echo "source ~/.bashrc" >> ~/.bash_profile 
 
-RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
+    echo "source /workspaces/ros1-devcontainer/devel/setup.bash" >> ~/.bashrc
