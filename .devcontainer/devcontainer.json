@@ -1,8 +1,18 @@
 {
 	"name": "ROS Remote Container",
-	"image": "wn1980/ros-devcontainer",
+	"image": "wn1980/ros1-devcontainer",
 	//"workspaceFolder": "/workspace",
 	"extensions": [
 		"ms-iot.vscode-ros"
 	],
+
+	"containerEnv": {
+        "DISPLAY": "unix:1"
+    },
+
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+      ],
+
+    "runArgs": ["--privileged"]
 }

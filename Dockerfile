@@ -1,4 +1,5 @@
-FROM ros:melodic-ros-core-bionic
+#FROM ros:melodic-ros-core-bionic
+FROM ros:noetic-ros-core-focal
 
 LABEL maintainer="Waipot Ngamsaad <waipotn@hotmail.com>"
 
@@ -30,8 +31,10 @@ RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb
 RUN apt-get update --fix-missing && apt-get upgrade -y
 RUN apt-get install -y \
     ros-${ROS_DISTRO}-xacro \
-    python-catkin-tools \
-    python-rosdep && \
+    ros-${ROS_DISTRO}-urdf \
+    ros-${ROS_DISTRO}-rviz \
+    python3-catkin-tools \
+    python3-rosdep && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -64,10 +67,6 @@ RUN rosdep fix-permissions && rosdep update
 
 # enable bash completion
 RUN echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc && \
-    #git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && \
-    #~/.bash_it/install.sh --silent && \
-    #rm ~/.bashrc.bak && \
-    #bash -i -c "bash-it enable completion git" && \
     echo "source ~/.bashrc" >> ~/.bash_profile 
 
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
